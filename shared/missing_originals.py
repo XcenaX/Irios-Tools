@@ -21,7 +21,7 @@ from .missing_originals_contract import (
 
 
 TOKEN_FILE_NAME = ".missing_originals_license.json"
-DEFAULT_API_BASE_URL = "http://127.0.0.1:8000"
+DEFAULT_API_BASE_URL = "https://protopathic-unadventurously-cristiano.ngrok-free.dev"
 DEFAULT_PRODUCT_NAME = "Missing Originals"
 
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from desktop_app.services.materials_writeoff_service import MaterialsWriteoffService
+from shared.license_client import API_REQUEST_HEADERS
 
 
 class _FakeHistoryService:
@@ -63,8 +64,9 @@ def test_process_standard_files_writes_workbook(monkeypatch, tmp_path: Path) -> 
         license_service=license_service,
     )
 
-    def fake_post(url, files, data, timeout):  # noqa: ANN001
+    def fake_post(url, *, headers, files, data, timeout):  # noqa: ANN001
         assert url.endswith("/v1/materials-writeoff/process-files-workbook")
+        assert headers == API_REQUEST_HEADERS
         assert "act_file" in files
         assert "ledger_file" in files
         assert data["enable_ai"] == "true"
@@ -93,8 +95,9 @@ def test_process_smart_contract_files_writes_workbook(monkeypatch, tmp_path: Pat
         history_service=_FakeHistoryService(),
     )
 
-    def fake_post(url, files, data, timeout):  # noqa: ANN001
+    def fake_post(url, *, headers, files, data, timeout):  # noqa: ANN001
         assert url.endswith("/v1/materials-writeoff/process-smart-contract-workbook")
+        assert headers == API_REQUEST_HEADERS
         assert [item[0] for item in files].count("appendix_files") == 2
         assert any(item[0] == "ledger_file" for item in files)
         return _FakeResponse(content=b"smart-xlsx")
@@ -123,8 +126,9 @@ def test_match_files_calls_api(monkeypatch, tmp_path: Path) -> None:
         license_service=license_service,
     )
 
-    def fake_post(url, files, data, timeout):  # noqa: ANN001
+    def fake_post(url, *, headers, files, data, timeout):  # noqa: ANN001
         assert url.endswith("/v1/materials-writeoff/match-files")
+        assert headers == API_REQUEST_HEADERS
         assert "act_file" in files
         assert "ledger_file" in files
         assert data["enable_ai"] == "true"
@@ -146,8 +150,9 @@ def test_extract_act_pdf_calls_api(monkeypatch, tmp_path: Path) -> None:
         history_service=_FakeHistoryService(),
     )
 
-    def fake_post(url, files, timeout):  # noqa: ANN001
+    def fake_post(url, *, headers, files, timeout):  # noqa: ANN001
         assert url.endswith("/v1/materials-writeoff/extract-act-pdf")
+        assert headers == API_REQUEST_HEADERS
         assert "act_file" in files
         return _FakeResponse(payload={"rows": [{"line_no": 1}], "raw_text_chars": 10})
 
@@ -166,8 +171,9 @@ def test_extract_smart_appendix_calls_api(monkeypatch, tmp_path: Path) -> None:
         history_service=_FakeHistoryService(),
     )
 
-    def fake_post(url, files, timeout):  # noqa: ANN001
+    def fake_post(url, *, headers, files, timeout):  # noqa: ANN001
         assert url.endswith("/v1/materials-writeoff/extract-smart-appendix")
+        assert headers == API_REQUEST_HEADERS
         assert "appendix_file" in files
         return _FakeResponse(payload={"raw_rows": [], "aggregated_rows": []})
 
@@ -184,8 +190,9 @@ def test_confirm_mapping_rule_calls_api(monkeypatch, tmp_path: Path) -> None:
         history_service=_FakeHistoryService(),
     )
 
-    def fake_post(url, json, timeout):  # noqa: ANN001
+    def fake_post(url, *, headers, json, timeout):  # noqa: ANN001
         assert url.endswith("/v1/materials-writeoff/mapping-rules/confirm")
+        assert headers == API_REQUEST_HEADERS
         assert json["act_material_name"] == "Act coating"
         assert json["ledger_material_name"] == "Ledger coating"
         return _FakeResponse(payload={"created": True, "rules_count": 1})

@@ -25,6 +25,7 @@ from .missing_originals_contract import PRODUCT_CODE as MISSING_ORIGINALS_PRODUC
 
 CONFIG_VERSION = 1
 TOKEN_ENV_VAR = "IRIOS_DESKTOP_LICENSE_TOKEN"
+API_REQUEST_HEADERS = {"ngrok-skip-browser-warning": "true"}
 
 
 @dataclass
@@ -156,6 +157,7 @@ def activate_license(
 ) -> dict[str, Any]:
     response = requests.post(
         f"{api_base_url.rstrip('/')}/v1/license/activate",
+        headers=API_REQUEST_HEADERS,
         json={
             "license_key": license_key,
             "product_code": product_code,
@@ -179,6 +181,7 @@ def check_license(
 ) -> dict[str, Any]:
     response = requests.post(
         f"{api_base_url.rstrip('/')}/v1/license/check",
+        headers=API_REQUEST_HEADERS,
         json={
             "token": token,
             "device_id": device_id,
@@ -201,6 +204,7 @@ def build_report_via_api(
 ) -> dict[str, Any]:
     response = requests.post(
         f"{api_base_url.rstrip('/')}/v1/products/{MISSING_ORIGINALS_PRODUCT_CODE}/build",
+        headers=API_REQUEST_HEADERS,
         json={
             "token": token,
             "device_id": device_id,
@@ -225,6 +229,7 @@ def build_hr_documents_via_api(
 ) -> dict[str, Any]:
     response = requests.post(
         f"{api_base_url.rstrip('/')}/v1/products/{product_code}/build",
+        headers=API_REQUEST_HEADERS,
         json={
             "token": token,
             "device_id": device_id,

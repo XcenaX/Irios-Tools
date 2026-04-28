@@ -9,6 +9,8 @@ import requests
 
 from desktop_app.config.paths import legacy_base_dir
 from desktop_app.state.models import MaterialsWriteoffRunResult, RunHistoryRecord, now_iso
+from shared.license_client import API_REQUEST_HEADERS
+from shared.missing_originals import DEFAULT_API_BASE_URL
 
 from .history_service import HistoryService
 from .license_service import humanize_error_message
@@ -30,7 +32,7 @@ class MaterialsWriteoffService:
         self.settings_service = settings_service
         self.history_service = history_service
         self.license_service = license_service
-        self.api_base_url = (api_base_url or "http://127.0.0.1:8000").rstrip("/")
+        self.api_base_url = (api_base_url or DEFAULT_API_BASE_URL).rstrip("/")
         self.base_dir = legacy_base_dir()
 
     def default_output_file(self, mode: Mode) -> Path:
@@ -114,6 +116,7 @@ class MaterialsWriteoffService:
         with act_file.open("rb") as act_stream, ledger_file.open("rb") as ledger_stream:
             response = requests.post(
                 f"{self.api_base_url}/v1/materials-writeoff/match-files",
+                headers=API_REQUEST_HEADERS,
                 files={
                     "act_file": (act_file.name, act_stream, "application/octet-stream"),
                     "ledger_file": (ledger_file.name, ledger_stream, "application/octet-stream"),
@@ -129,6 +132,7 @@ class MaterialsWriteoffService:
         with act_file.open("rb") as act_stream:
             response = requests.post(
                 f"{self.api_base_url}/v1/materials-writeoff/extract-act-pdf",
+                headers=API_REQUEST_HEADERS,
                 files={"act_file": (act_file.name, act_stream, "application/pdf")},
                 timeout=180,
             )
@@ -140,6 +144,7 @@ class MaterialsWriteoffService:
         with appendix_file.open("rb") as appendix_stream:
             response = requests.post(
                 f"{self.api_base_url}/v1/materials-writeoff/extract-smart-appendix",
+                headers=API_REQUEST_HEADERS,
                 files={"appendix_file": (appendix_file.name, appendix_stream, "application/octet-stream")},
                 timeout=180,
             )
@@ -158,6 +163,7 @@ class MaterialsWriteoffService:
         self._ensure_license()
         response = requests.post(
             f"{self.api_base_url}/v1/materials-writeoff/mapping-rules/confirm",
+            headers=API_REQUEST_HEADERS,
             json={
                 "act_material_name": act_material_name,
                 "ledger_material_name": ledger_material_name,
@@ -189,6 +195,7 @@ class MaterialsWriteoffService:
             with act_file.open("rb") as act_stream, ledger_file.open("rb") as ledger_stream:
                 response = requests.post(
                     f"{self.api_base_url}{endpoint}",
+                    headers=API_REQUEST_HEADERS,
                     files={
                         "act_file": (
                             act_file.name,
@@ -226,6 +233,7 @@ class MaterialsWriteoffService:
                     )
                     response = requests.post(
                         f"{self.api_base_url}{endpoint}",
+                        headers=API_REQUEST_HEADERS,
                         files=files,
                         data={"enable_ai": "true"},
                         timeout=300,
