@@ -90,6 +90,10 @@ if ($releaseExists) {
         --notes "Desktop update $Version"
 }
 
+$ReleaseMessage = [System.Text.Encoding]::UTF8.GetString(
+    [System.Convert]::FromBase64String("0J/QvtC00L7QttC00LjRgtC1LCDQv9GA0L7Qs9GA0LDQvNC80LAg0L7QsdC90L7QstC70Y/QtdGC0YHRjw==")
+)
+
 $Manifest = [ordered]@{
     version = $Version
     mandatory = $true
@@ -98,7 +102,7 @@ $Manifest = [ordered]@{
     sha256 = $Hash
     size = $Size
     published_at = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
-    message = "Подождите, программа обновляется"
+    message = $ReleaseMessage
 }
 
 $Manifest | ConvertTo-Json -Depth 5 | Set-Content -Path $ManifestPath -Encoding UTF8
