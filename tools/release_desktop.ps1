@@ -105,7 +105,9 @@ $Manifest = [ordered]@{
     message = $ReleaseMessage
 }
 
-$Manifest | ConvertTo-Json -Depth 5 | Set-Content -Path $ManifestPath -Encoding UTF8
+$ManifestJson = $Manifest | ConvertTo-Json -Depth 5
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+[System.IO.File]::WriteAllText($ManifestPath, $ManifestJson + [Environment]::NewLine, $Utf8NoBom)
 
 if (-not $SkipPush) {
     git add desktop_app/config/app_info.py releases/latest.json

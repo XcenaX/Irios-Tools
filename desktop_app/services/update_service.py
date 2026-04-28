@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import hashlib
+import json
 import os
 from pathlib import Path
 import re
@@ -40,7 +41,7 @@ class UpdateService:
             timeout=10,
         )
         response.raise_for_status()
-        payload = response.json()
+        payload = json.loads(response.content.decode("utf-8-sig"))
         latest_version = str(payload.get("version", "")).strip()
         if not latest_version or _version_tuple(latest_version) <= _version_tuple(APP_VERSION):
             return None

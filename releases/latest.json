@@ -1,10 +1,10 @@
-﻿{
-    "version":  "3.0.0",
-    "mandatory":  true,
-    "min_supported_version":  "3.0.0",
-    "url":  "https://github.com/XcenaX/Irios-Tools/releases/download/v3.0.0/Irios.Tools.exe",
-    "sha256":  "e1063eaa7e12c0489a300fe79a55f9e7f0a42e2085288b8849067607b7daf6a9",
-    "size":  221578972,
-    "published_at":  "2026-04-28T07:51:44Z",
-    "message":  "\u041f\u043e\u0434\u043e\u0436\u0434\u0438\u0442\u0435, \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 \u043e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u0442\u0441\u044f"
+{
+  "version": "3.0.0",
+  "mandatory": true,
+  "min_supported_version": "3.0.0",
+  "url": "https://github.com/XcenaX/Irios-Tools/releases/download/v3.0.0/Irios.Tools.exe",
+  "sha256": "e1063eaa7e12c0489a300fe79a55f9e7f0a42e2085288b8849067607b7daf6a9",
+  "size": 221578972,
+  "published_at": "2026-04-28T07:51:44Z",
+  "message": "\u041f\u043e\u0434\u043e\u0436\u0434\u0438\u0442\u0435, \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 \u043e\u0431\u043d\u043e\u0432\u043b\u044f\u0435\u0442\u0441\u044f"
 }

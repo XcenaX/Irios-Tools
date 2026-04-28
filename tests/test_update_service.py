@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 from desktop_app.services import update_service
 from desktop_app.services.update_service import UpdateService
 
@@ -7,13 +9,10 @@ from desktop_app.services.update_service import UpdateService
 class _FakeResponse:
     def __init__(self, payload: dict) -> None:
         self._payload = payload
+        self.content = ("\ufeff" + json.dumps(payload)).encode("utf-8")
 
     def raise_for_status(self) -> None:
         return None
-
-    def json(self) -> dict:
-        return self._payload
-
 
 def test_fetch_update_info_returns_none_for_current_version(monkeypatch) -> None:
     monkeypatch.setattr(
@@ -46,3 +45,4 @@ def test_fetch_update_info_detects_newer_version(monkeypatch) -> None:
     assert update.version == "99.0.0"
     assert update.url == "https://example.test/Irios.Tools.exe"
     assert update.sha256 == "abc123"
+    assert update.message == "Обновление"
