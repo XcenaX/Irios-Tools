@@ -40,6 +40,7 @@ if __name__ == "__main__":
 if (-not $SkipTests) {
     python -m pytest `
         tests/test_license_config.py `
+        tests/test_update_service.py `
         tests/test_hr_documents_desktop.py `
         tests/test_materials_writeoff_desktop.py `
         tests/test_hr_organization_cards.py `
@@ -75,7 +76,7 @@ $Size = (Get-Item -LiteralPath $ReleaseAssetPath).Length
 $DownloadUrl = "https://github.com/$Repo/releases/download/$Tag/$ReleaseAssetName"
 
 $releaseExists = $true
-gh release view $Tag --repo $Repo *> $null
+cmd.exe /c "gh release view $Tag --repo $Repo >NUL 2>NUL"
 if ($LASTEXITCODE -ne 0) {
     $releaseExists = $false
 }
