@@ -1,10 +1,10 @@
 {
-    "version":  "3.0.1",
+    "version":  "3.0.2",
     "mandatory":  true,
     "min_supported_version":  "3.0.0",
-    "url":  "https://github.com/XcenaX/Irios-Tools/releases/download/v3.0.1/Irios.Tools.exe",
-    "sha256":  "522b0ffbec5389c49f493c9ba18b3e6cd19b6789e8eedde0c2a98c74fb14ddfe",
-    "size":  221578770,
-    "published_at":  "2026-04-28T08:02:25Z",
+    "url":  "https://github.com/XcenaX/Irios-Tools/releases/download/v3.0.2/Irios.Tools.exe",
+    "sha256":  "59d7ded63d78376d965fd28a74e612ed5fff917d16b5cfda1b70e8b789528dd7",
+    "size":  221580580,
+    "published_at":  "2026-04-28T10:43:25Z",
     "message":  "Подождите, программа обновляется"
 }
