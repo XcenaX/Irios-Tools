@@ -6,7 +6,6 @@ import json
 import os
 from pathlib import Path
 import platform
-import subprocess
 import uuid
 from typing import Any
 import ctypes
@@ -51,9 +50,33 @@ def get_device_name() -> str:
 
 
 def _read_machine_guid() -> str:
-    if os.name != "nt":
+    if os.name != "nt" or winreg is None:
         return ""
+    key_path = r"SOFTWARE\Microsoft\Cryptography"
+    access_modes = (
+        winreg.KEY_READ | getattr(winreg, "KEY_WOW64_64KEY", 0),
+        winreg.KEY_READ,
+    )
+    for access in access_modes:
+        try:
+            with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, access) as key:
+                value, _ = winreg.QueryValueEx(key, "MachineGuid")
+                return str(value).strip()
+        except OSError:
+            continue
+    return _read_machine_guid_legacy()
+
+
+def _read_machine_guid_legacy() -> str:
     try:
+        import subprocess
+
+        startupinfo = None
+        creationflags = 0
+        if os.name == "nt":
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            creationflags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
         output = subprocess.check_output(
             [
                 "reg",
@@ -65,6 +88,8 @@ def _read_machine_guid() -> str:
             text=True,
             encoding="utf-8",
             errors="ignore",
+            startupinfo=startupinfo,
+            creationflags=creationflags,
         )
     except Exception:
         return ""

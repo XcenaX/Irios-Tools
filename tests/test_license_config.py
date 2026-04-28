@@ -63,3 +63,36 @@ def test_license_config_prefers_user_env_token(tmp_path, monkeypatch) -> None:
     config = load_license_config(tmp_path)
 
     assert config.token == "env-token"
+
+
+def test_read_machine_guid_uses_winreg_without_reg_process(monkeypatch) -> None:
+    class FakeKey:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return False
+
+    class FakeWinreg:
+        HKEY_LOCAL_MACHINE = object()
+        KEY_READ = 1
+        KEY_WOW64_64KEY = 2
+
+        @staticmethod
+        def OpenKey(*_args):
+            return FakeKey()
+
+        @staticmethod
+        def QueryValueEx(_key, name):
+            assert name == "MachineGuid"
+            return "machine-guid-1", None
+
+    monkeypatch.setattr(license_client.os, "name", "nt")
+    monkeypatch.setattr(license_client, "winreg", FakeWinreg)
+    monkeypatch.setattr(
+        license_client,
+        "_read_machine_guid_legacy",
+        lambda: (_ for _ in ()).throw(AssertionError("reg.exe fallback should not run")),
+    )
+
+    assert license_client._read_machine_guid() == "machine-guid-1"
