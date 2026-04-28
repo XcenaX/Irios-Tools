@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "organizations": [
+    {
+      "organization_code": "isb_engineering",
+      "organization_name": "ТОО ИСБ-Инжиниринг",
+      "is_default": true,
+      "document_city": "Астана",
+      "employer_name": "Товарищество с ограниченной ответственностью \"ИСБ-Инжиниринг\"",
+      "employer_short_name": "ТОО «ИСБ-Инжиниринг»",
+      "employer_display_name": "ИСБ-Инжиниринг",
+      "employer_legal_address": "Республика Казахстан, г. Астана, район Алматы, улица Бейимбет Майлин, здание 2/1",
+      "employer_bin": "150540017923",
+      "employer_iik": "KZ808562203116426083",
+      "employer_bank": "АО \"Банк ЦентрКредит\"",
+      "employer_bik": "KCJBKZKX",
+      "employer_director_name": "Савостьянов Юрий Александрович",
+      "employer_director_position": "Генеральный директор",
+      "employer_sign_basis": "Устава",
+      "default_contract_template_code": "isb_standard_v1",
+      "available_contract_template_codes": [
+        "isb_standard_v1"
+      ]
+    },
+    {
+      "organization_code": "gefest_consortium",
+      "organization_name": "ТОО Gefest Consortium",
+      "is_default": false,
+      "document_city": "Астана",
+      "employer_name": "Товарищество с ограниченной ответственностью \"Gefest Consortium\"",
+      "employer_short_name": "ТОО \"Gefest Consortium\"",
+      "employer_display_name": "Gefest Consortium",
+      "employer_legal_address": "130000, Республика Казахстан, г. Астана, ул. Пушкина, дом 15, к. 135",
+      "employer_bin": "140440010891",
+      "employer_iik": "KZ108562203116393975",
+      "employer_bank": "АО \"Банк ЦентрКредит\"",
+      "employer_bik": "KCJBKZKX",
+      "employer_director_name": "Алиев Салман Сулумбекович",
+      "employer_director_position": "Генеральный директор",
+      "employer_sign_basis": "Устава",
+      "default_contract_template_code": "gefest_standard_v1",
+      "available_contract_template_codes": [
+        "gefest_standard_v1"
+      ]
+    }
+  ]
+}

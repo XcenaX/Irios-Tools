@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "fields": [
+    {
+      "source_code": "t2_last_name",
+      "source_label": "Фамилия",
+      "technical_name": "employee_last_name",
+      "meaning": "Фамилия сотрудника",
+      "transforms": ["strip"]
+    },
+    {
+      "source_code": "t2_first_name",
+      "source_label": "Имя",
+      "technical_name": "employee_first_name",
+      "meaning": "Имя сотрудника",
+      "transforms": ["strip"]
+    },
+    {
+      "source_code": "t2_middle_name",
+      "source_label": "Отчество",
+      "technical_name": "employee_middle_name",
+      "meaning": "Отчество сотрудника",
+      "transforms": ["strip"]
+    },
+    {
+      "source_code": "t2_phone",
+      "source_label": "Телефон",
+      "technical_name": "employee_iin",
+      "meaning": "ИИН сотрудника, хранимый в поле телефона",
+      "transforms": ["strip", "digits_only"],
+      "required_for": ["employment_contract"]
+    },
+    {
+      "source_code": "t2_birth_place",
+      "source_label": "Место рождения",
+      "technical_name": "employment_type",
+      "meaning": "Основное место работы / совместительство",
+      "transforms": ["strip", "normalize_employment_type"],
+      "required_for": ["employment_contract", "hire_order"]
+    },
+    {
+      "source_code": "t2_birth_date",
+      "source_label": "Дата рождения",
+      "technical_name": "employee_birth_date",
+      "meaning": "Дата рождения сотрудника",
+      "transforms": ["date_iso"]
+    },
+    {
+      "source_code": "t2_id_doc_type",
+      "source_label": "Вид документа",
+      "technical_name": "employee_id_doc_type",
+      "meaning": "Документ, удостоверяющий личность",
+      "transforms": ["strip"]
+    },
+    {
+      "source_code": "t2_id_doc_number",
+      "source_label": "Номер документа",
+      "technical_name": "employee_id_doc_number",
+      "meaning": "Номер документа",
+      "transforms": ["strip"]
+    },
+    {
+      "source_code": "t2_id_doc_issuer",
+      "source_label": "Кем выдан",
+      "technical_name": "employee_id_doc_issuer",
+      "meaning": "Орган выдачи документа",
+      "transforms": ["strip"]
+    },
+    {
+      "source_code": "t2_id_doc_issue_date",
+      "source_label": "Дата выдачи",
+      "technical_name": "employee_id_doc_issue_date",
+      "meaning": "Дата выдачи документа",
+      "transforms": ["date_iso"]
+    },
+    {
+      "source_code": "t2_home_address",
+      "source_label": "Домашний адрес",
+      "technical_name": "employee_address",
+      "meaning": "Основной адрес сотрудника",
+      "transforms": ["strip"]
+    },
+    {
+      "source_code": "t2_personnel_number",
+      "source_label": "Табельный номер",
+      "technical_name": "employee_personnel_number",
+      "meaning": "Табельный номер сотрудника",
+      "transforms": ["strip"]
+    },
+    {
+      "source_code": "t2_employment_start_date",
+      "source_label": "Дата приема",
+      "technical_name": "employment_start_date",
+      "meaning": "Дата начала работы",
+      "transforms": ["date_iso"],
+      "required_for": ["employment_contract", "hire_order", "vacation"]
+    },
+    {
+      "source_code": "t2_current_department",
+      "source_label": "Подразделение",
+      "technical_name": "employee_department",
+      "meaning": "Текущее подразделение",
+      "transforms": ["strip"]
+    },
+    {
+      "source_code": "t2_current_position",
+      "source_label": "Должность",
+      "technical_name": "employee_position",
+      "meaning": "Текущая должность",
+      "transforms": ["strip"],
+      "required_for": ["employment_contract", "hire_order"]
+    },
+    {
+      "source_code": "t2_current_salary",
+      "source_label": "Оклад",
+      "technical_name": "employee_salary",
+      "meaning": "Текущий оклад",
+      "transforms": ["money_decimal"],
+      "required_for": ["employment_contract", "hire_order"]
+    }
+  ]
+}

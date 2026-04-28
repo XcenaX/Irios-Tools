@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "documents": {
+    "hire_order_basis_template": "Трудовой договор № {contract_number} от {contract_date}",
+    "hire_order_template_path": "templates/hr/orders/source_prikaz_obraz.docx"
+  },
+  "vacation": {
+    "default_days_entitled_per_year": 24,
+    "exclude_holidays": true,
+    "exclude_weekends": false,
+    "allow_carry_over": true
+  }
+}

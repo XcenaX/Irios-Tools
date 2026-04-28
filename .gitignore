@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Local state and licenses
+.runtime_hr_license/
+.missing_originals_license.json
+.hr_documents_license.json
+.irios_license.json
+*.db
+*.sqlite
+*.sqlite3
+data/materials_writeoff_block_check_docker/
+
+# Build artifacts
+.tmp/
+dist/
+build/
+_generated/
+*.exe
+*.pyz
+*.pkg
+*.toc
+
+# Local outputs
+output/
+hr_documents/
+materials_writeoff/
+*.log
+
+# OS/editor
+.DS_Store
+Thumbs.db
+desktop.ini

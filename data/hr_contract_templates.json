@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "templates": [
+    {
+      "template_code": "isb_standard_v1",
+      "template_name": "Типовой трудовой договор ИСБ",
+      "document_kind": "employment_contract",
+      "organization_codes": [
+        "isb_engineering"
+      ],
+      "contract_kind": "standard_employment",
+      "file_path": "templates/hr/contracts/isb_standard_v1_prepared.docx",
+      "required_variables": [
+        "employee_full_name",
+        "employee_iin",
+        "employee_id_doc_type",
+        "employee_id_doc_number",
+        "employee_id_doc_issuer",
+        "employee_id_doc_issue_date",
+        "employment_start_date",
+        "employee_position",
+        "employee_salary",
+        "employer_name",
+        "employer_director_name"
+      ],
+      "optional_variables": [
+        "employee_address",
+        "contract_end_date",
+        "employee_salary_words",
+        "weekend_days"
+      ],
+      "feature_flags": {
+        "show_contract_end_date_if_fixed_term": true,
+        "auto_build_salary_words": true,
+        "auto_build_short_name": true,
+        "allow_empty_employee_address": true
+      }
+    },
+    {
+      "template_code": "gefest_standard_v1",
+      "template_name": "Типовой трудовой договор Gefest",
+      "document_kind": "employment_contract",
+      "organization_codes": [
+        "gefest_consortium"
+      ],
+      "contract_kind": "standard_employment",
+      "file_path": "templates/hr/contracts/gefest_standard_v1_prepared.docx",
+      "required_variables": [
+        "employee_full_name",
+        "employee_iin",
+        "employee_id_doc_type",
+        "employee_id_doc_number",
+        "employee_id_doc_issuer",
+        "employee_id_doc_issue_date",
+        "employment_start_date",
+        "employee_position",
+        "employee_salary",
+        "employer_name",
+        "employer_director_name"
+      ],
+      "optional_variables": [
+        "employee_address",
+        "contract_end_date",
+        "employee_salary_words",
+        "weekend_days"
+      ],
+      "feature_flags": {
+        "show_contract_end_date_if_fixed_term": true,
+        "auto_build_salary_words": true,
+        "auto_build_short_name": true,
+        "allow_empty_employee_address": true
+      }
+    }
+  ]
+}
