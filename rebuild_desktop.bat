@@ -13,9 +13,13 @@ if not exist ".tmp" mkdir ".tmp"
 
 set "ROOT=%CD%"
 set "ENTRY=%ROOT%\.tmp\irios_desktop_entry.py"
-set "DIST=%ROOT%\.tmp\package_dist"
-set "BUILD=%ROOT%\.tmp\package_build"
-set "EXE=%DIST%\Irios Tools\Irios Tools.exe"
+set "DIST=%ROOT%\.tmp\package_onefile"
+set "BUILD=%ROOT%\.tmp\package_build_onefile"
+set "OLD_ONEDIR=%ROOT%\.tmp\package_dist\Irios Tools"
+set "EXE=%DIST%\Irios Tools.exe"
+
+if exist "%OLD_ONEDIR%" rmdir /s /q "%OLD_ONEDIR%"
+if exist "%EXE%" del /f /q "%EXE%"
 
 > "%ENTRY%" (
     echo from desktop_app.app.main import run
@@ -29,7 +33,7 @@ python -m PyInstaller ^
   --noconfirm ^
   --clean ^
   --windowed ^
-  --onedir ^
+  --onefile ^
   --name "Irios Tools" ^
   --icon "%ROOT%\assets\icon.ico" ^
   --distpath "%DIST%" ^
